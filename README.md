@@ -214,6 +214,8 @@ pipeline {
 }
 ```
 
+See [example-declarative-pipeline.groovy](src/test/resources/example-declarative-pipeline.groovy) for a complete example.
+
 After the pipeline runs successfully:
 1. Navigate to the build in Jenkins UI
 2. Click "Promote" if a manual promotion condition is configured
@@ -253,6 +255,8 @@ pipeline {
     }
 }
 ```
+
+See [example-promoted-build-parameter.groovy](src/test/resources/example-promoted-build-parameter.groovy) for a complete example.
 
 ## Job DSL support
 
