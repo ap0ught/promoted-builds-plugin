@@ -144,5 +144,29 @@
       <artifactId>matrix-project</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <!-- Needed for Declarative Pipeline tests -->
+      <groupId>org.jenkinsci.plugins.workflow</groupId>
+      <artifactId>workflow-job</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <!-- Needed for Declarative Pipeline tests -->
+      <groupId>org.jenkinsci.plugins.workflow</groupId>
+      <artifactId>workflow-cps</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <!-- Needed for Declarative Pipeline tests -->
+      <groupId>org.jenkinsci.plugins.workflow</groupId>
+      <artifactId>workflow-basic-steps</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <!-- Needed for Declarative Pipeline tests -->
+      <groupId>org.jenkinsci.plugins.workflow</groupId>
+      <artifactId>workflow-durable-task-step</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 </project>
