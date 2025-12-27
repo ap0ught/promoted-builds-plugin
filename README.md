@@ -128,6 +128,136 @@ These were retrieved from github [here][2].
 *   `PROMOTED_USER_NAME` - the user who triggered the promotion
 *   `PROMOTED_JOB_FULL_NAME` - the full name of the promoted job
 
+## Declarative Pipeline support
+
+In Declarative Pipeline, you can configure promoted builds using the `properties` directive in your `Jenkinsfile`. The plugin integrates with Jenkins Pipeline by exposing job properties that can be configured at the pipeline level.
+
+**Note:** Promotion processes are configured at the **job level**, not within individual pipeline stages. Once configured, builds can be promoted either automatically (based on conditions) or manually through the Jenkins UI.
+
+### Basic Syntax
+
+```groovy
+pipeline {
+    agent any
+    
+    properties([
+        pipelineTriggers([]),
+        [$class: 'JobPropertyImpl', 
+            activeProcessNames: ['Development', 'Production'] as Set
+        ]
+    ])
+    
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building...'
+            }
+        }
+    }
+}
+```
+
+### Configuring Promotions via Jenkins UI
+
+While the pipeline defines which promotion processes are active, the actual promotion process configuration (conditions, actions, etc.) must be configured through the Jenkins UI:
+
+1. Open your Pipeline job configuration page
+2. Look for the "Promote builds when..." section
+3. Add and configure promotion processes with names matching those in your `activeProcessNames` list
+4. Define promotion conditions (manual, downstream success, etc.)
+5. Define promotion actions (shell scripts, downstream jobs, etc.)
+
+### Using Promoted Build Variables
+
+When a promotion runs, the following environment variables are available in the promotion process actions:
+
+*   `PROMOTED_URL` - URL of the job being promoted
+*   `PROMOTED_JOB_NAME` - Promoted job name
+*   `PROMOTED_NUMBER` - Build number of the promoted job
+*   `PROMOTED_ID` - ID of the build being promoted
+*   `PROMOTED_USER_NAME` - The user who triggered the promotion (for manual promotions)
+*   `PROMOTED_JOB_FULL_NAME` - The full name of the promoted job
+
+### Example: Manual Promotion
+
+```groovy
+// Jenkinsfile
+pipeline {
+    agent any
+    
+    properties([
+        [$class: 'JobPropertyImpl', 
+            activeProcessNames: ['QA-Approved', 'Production-Ready'] as Set
+        ]
+    ])
+    
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building application...'
+                // Your build steps
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                // Your test steps
+            }
+        }
+    }
+    
+    post {
+        success {
+            echo 'Build successful. Ready for promotion.'
+        }
+    }
+}
+```
+
+See [example-declarative-pipeline.groovy](src/test/resources/example-declarative-pipeline.groovy) for a complete example.
+
+After the pipeline runs successfully:
+1. Navigate to the build in Jenkins UI
+2. Click "Promote" if a manual promotion condition is configured
+3. Select the promotion level (e.g., "QA-Approved")
+4. The promotion process will execute its configured actions
+
+### Limitations
+
+- Promotion process configuration (conditions, icons, actions) cannot be fully defined in the Jenkinsfile itself; it must be configured through the Jenkins UI
+- For complete programmatic configuration, consider using [Job DSL](#job-dsl-support) instead
+- The `properties` directive only specifies which promotion processes are active
+
+### Accessing Promoted Builds from Pipeline
+
+You can use the promoted build parameter to select a specific promoted build in downstream jobs:
+
+```groovy
+pipeline {
+    agent any
+    
+    parameters {
+        promotedBuild(
+            name: 'PROMOTED_BUILD',
+            project: 'upstream-job',
+            promotion: 'Production-Ready',
+            description: 'Select a production-ready build to deploy'
+        )
+    }
+    
+    stages {
+        stage('Deploy') {
+            steps {
+                echo "Deploying build from: ${params.PROMOTED_BUILD}"
+                // Your deployment steps using the promoted build
+            }
+        }
+    }
+}
+```
+
+See [example-promoted-build-parameter.groovy](src/test/resources/example-promoted-build-parameter.groovy) for a complete example.
+
 ## Job DSL support
 
 ```groovy  
