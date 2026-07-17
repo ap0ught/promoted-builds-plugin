@@ -1,0 +1,26 @@
+{
+  "jobName": "promoted-semo-scm-pipeline",
+  "description": "Promoted Builds demo from a local SCM checkout.",
+  "scm": {
+    "url": "file:///var/jenkins_home/scm/example-app.git",
+    "branch": "*/main"
+  },
+  "buildScript": "build.sh",
+  "promotions": [
+    {
+      "name": "prod",
+      "script": "promotions/prod.sh",
+      "label": "pretend prod location"
+    },
+    {
+      "name": "np",
+      "script": "promotions/np.sh",
+      "label": "pretend np location"
+    },
+    {
+      "name": "sbx",
+      "script": "promotions/sbx.sh",
+      "label": "pretend sbx location"
+    }
+  ]
+}
