@@ -26,9 +26,10 @@ class ScmExampleDirectoryTest {
         String jobConfig = FileUtils.readFileToString(new File(EXAMPLE_DIR, "jenkins/job-config.json"), StandardCharsets.UTF_8);
         String jobXml = FileUtils.readFileToString(new File(EXAMPLE_DIR, "jenkins/promoted-semo-scm-pipeline/config.xml"), StandardCharsets.UTF_8);
 
+        assertTrue(readme.contains("https://github.com/ap0ught/promoted-builds-plugin"));
         assertTrue(readme.contains("deleted and recreated from the SCM contents"));
-        assertTrue(jobConfig.contains("promoted-semo-scm-pipeline"));
+        assertTrue(jobConfig.contains("promoted-builds-plugin"));
         assertTrue(jobXml.contains("JobPropertyImpl"));
-        assertTrue(jobXml.contains("bash build.sh"));
+        assertTrue(jobXml.contains("bash src/test/resources/examples/promoted-semo-scm-pipeline/build.sh"));
     }
 }

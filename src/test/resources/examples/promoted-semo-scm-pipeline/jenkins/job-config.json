@@ -1,11 +1,11 @@
 {
   "jobName": "promoted-semo-scm-pipeline",
-  "description": "Promoted Builds demo from a local SCM checkout.",
+  "description": "Promoted Builds demo from the promoted-builds-plugin GitHub repository.",
   "scm": {
-    "url": "file:///var/jenkins_home/scm/example-app.git",
-    "branch": "*/main"
+    "url": "https://github.com/ap0ught/promoted-builds-plugin",
+    "branch": "*/master"
   },
-  "buildScript": "build.sh",
+  "buildScript": "src/test/resources/examples/promoted-semo-scm-pipeline/build.sh",
   "promotions": [
     {
       "name": "prod",
