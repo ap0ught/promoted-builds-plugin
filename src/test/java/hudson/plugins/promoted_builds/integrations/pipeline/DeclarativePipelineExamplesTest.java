@@ -63,8 +63,7 @@ class DeclarativePipelineExamplesTest {
         ));
         
         // Add promotion configuration to upstream job
-        JobPropertyImpl promotionProperty = new JobPropertyImpl(upstreamJob);
-        upstreamJob.addProperty(promotionProperty);
+        JobPropertyImpl promotionProperty = new JobPropertyImpl(java.util.Set.of("Production-Ready"));
         PromotionProcess process = promotionProperty.addProcess("Production-Ready");
         process.conditions.add(new ManualCondition());
         

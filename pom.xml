@@ -146,26 +146,30 @@
     </dependency>
     <dependency>
       <!-- Needed for Declarative Pipeline tests -->
-      <groupId>org.jenkinsci.plugins.workflow</groupId>
+      <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-job</artifactId>
+      <version>1549.vc8d7f497b_22f</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <!-- Needed for Declarative Pipeline tests -->
-      <groupId>org.jenkinsci.plugins.workflow</groupId>
+      <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-cps</artifactId>
+      <version>4183.v94b_6fd39da_c1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <!-- Needed for Declarative Pipeline tests -->
-      <groupId>org.jenkinsci.plugins.workflow</groupId>
+      <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-basic-steps</artifactId>
+      <version>1079.vce64b_a_929c5a_</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <!-- Needed for Declarative Pipeline tests -->
-      <groupId>org.jenkinsci.plugins.workflow</groupId>
+      <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-durable-task-step</artifactId>
+      <version>1479.v56e587f413a_7</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
