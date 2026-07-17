@@ -19,3 +19,5 @@ Promotions:
 - `sbx` -> pretend sbx location
 
 The Jenkins job reads `jenkins/job-config.json` so the job config and promotion setup live in this repo.
+
+This demo is intended to be deleted and recreated from the SCM contents.
