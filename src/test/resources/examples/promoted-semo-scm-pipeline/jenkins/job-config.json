@@ -1,0 +1,26 @@
+{
+  "jobName": "promoted-semo-scm-pipeline",
+  "description": "Promoted Builds demo from the promoted-builds-plugin GitHub repository.",
+  "scm": {
+    "url": "https://github.com/ap0ught/promoted-builds-plugin",
+    "branch": "*/master"
+  },
+  "buildScript": "src/test/resources/examples/promoted-semo-scm-pipeline/build.sh",
+  "promotions": [
+    {
+      "name": "prod",
+      "script": "promotions/prod.sh",
+      "label": "pretend prod location"
+    },
+    {
+      "name": "np",
+      "script": "promotions/np.sh",
+      "label": "pretend np location"
+    },
+    {
+      "name": "sbx",
+      "script": "promotions/sbx.sh",
+      "label": "pretend sbx location"
+    }
+  ]
+}
